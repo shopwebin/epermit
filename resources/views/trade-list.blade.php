@@ -17,7 +17,7 @@
                     {{session()->forget('alert')}}
                 </script>
             @endif
-            <div class="card-body">
+            <div class="card-body" style="overflow: auto;height: 75vh;">
                 <table class="table theme-tbl table-bordered">
                     <thead>
                         <tr>

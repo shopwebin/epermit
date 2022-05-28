@@ -12,6 +12,8 @@
                     <btn onclick="" title="History"><i class="priya-history"></i></btn>
                 </div>
             </h5>
+                @if(isset($dat[0]->qty))    @else
+                @php $dat[0]->qty = 0;@endphp   @endif
             <div class="card-body">
                 <!--div class="form-group">
                     <label>Type of Permit <span class="text-danger">*</span></label>
@@ -140,8 +142,6 @@
                                 });
                             });
                         </script>
-                @if(isset($dat[0]->qty))    @else
-                @php $dat[0]->qty = 1;@endphp   @endif
                 @if(isset($type)) 
                     <form action="{{url('permit')}}/primary/edit/{{$dat[0]->id}}" method="post">
                  @else 
@@ -322,6 +322,8 @@
                         <div class="col-12 text-center">
                         @if(isset($dt))
                             @if(strtotime($dt[0]." ".$dt[1]) > time())
+                                <input type="submit" value="Early Arrival" class="btn" name="submit">
+                                <input type="submit" value="SOS" class="btn" name="submit">
                                 <button id="cancelbtn" class="btn">Cancel Permit</button>
                                 <input type="submit" name="" class="btn" value="Edit Permit">
                             @endif

@@ -236,7 +236,6 @@ class Trader_applyController extends Controller
 
     public function edit_pre_permit($id, Request $request)
     {
-        $input = $request->all();
         $input['valid_from'] = $input['fd'] . ' ' . $input['ft'];
         $input['valid_to'] = $input['td'] . ' ' . $input['tt'];
         $id = $input['id'];
@@ -248,8 +247,14 @@ class Trader_applyController extends Controller
         unset($input['ft']);
         unset($input['td']);
         unset($input['tt']);
-        $trade = DB::table('permit')->where('id', $id)->update($input);
+        $input = $request->all();
+        if(isset($input['submit'])){
+            if($input['submit'] == 'SOS'){
+                var_dump($input);
+            }
+        }
         return redirect('trade-list')->with('alert', 'Primary Premit updated Successfully');
+        }
     }
 
     public function edit($id = null){

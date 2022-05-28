@@ -298,6 +298,12 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for=""> Sales Invoice/Reciept </label>
+                                <input type="" class="invoice form-control pri-form" name= "incoice">
+                            </div>
+                        </div>
                         @if(isset($dt))
                         <div class="col-md-4">
                             <div class="form-group">
@@ -321,6 +327,8 @@
                     <div class="text-center">
                     @if(isset($dt))
                         @if(strtotime($dt[0]." ".$dt[1]) > time())
+                        <input type="submit" value="Early Arrival" class="btn" name="submit">
+                        <input type="submit" value="SOS" class="btn" name="submit">
                         <button id="cancelbtn" class="btn">Cancel Permit</button>    
                         <input type="submit" class="btn" value="Edit Permit">
                         @endif

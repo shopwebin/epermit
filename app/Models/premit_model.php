@@ -26,7 +26,7 @@ class premit_model extends Model
             'valid_from' => $request->input('fd').' '.$request->input('ft'),
             'valid_to' => $request->input('td').' '.$request->input('tt'),
             'mobile'    => $request->input('mobile'),
-            'value'    => $request->input('trade_val'),
+            'value'    => $request->input('value'),
             'invoice'    => $request->input('invoice'),
             'trader_id' => '4',
         ]);

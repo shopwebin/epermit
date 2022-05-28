@@ -110,6 +110,7 @@ class tradelist_model extends Model
     }
 
     public static function show(){
+        // DB::enableQueryLog();
         $dat = DB::select('SELECT `trade`.*,`quantity`.`qty_name` as `qty`,`commodity`.`com_name` as `cty` ,`amc`.`name` as `amc` FROM `trade` JOIN `amc` on `amc`.`id` = `trade`.`amc_id` JOIN `commodity` on `commodity`.`com_id` = `commodity_id` JOIN `quantity` on `quantity`.`id` = `quantity_id` Order By trade.id DESC');
         $i=0;
         foreach($dat as $d){
@@ -117,6 +118,7 @@ class tradelist_model extends Model
             $dat[$i]->sec = DB::table('spermit')->where('t_id',$id)->where('c_status',1)->get('id')->all();
             $i++;
         }
+        // dd(DB::getQueryLog());
         return $dat;
     }
 
@@ -127,8 +129,7 @@ class tradelist_model extends Model
 
     public function history($request){
         // $dat = DB::table('trade')->join('amc','amc.id','=','trade.amc_id')->join('commodity','commodity.com_id','=','trade.commodity_id')->join('quantity','quantity.id','=','quantity_id')->where('trade.created_at','>=',$request->input('fd'))->where('trade.created_at','<=',$request->input('td'))->get('trade.*,amc.name as amc1,commodity.*,quantity.qty_name')->all();
-        // DB::enableQueryLog();
-        // dd(DB::getQueryLog());
+        
         $dat = DB::select('select trade.*,amc.name as amc1,commodity.*,quantity.qty_name from trade inner join amc on amc.id = trade.amc_id inner join commodity on commodity.com_id = trade.commodity_id inner join quantity on quantity.id = quantity_id where trade.created_at >= ? and trade.created_at <= ? and trader_id = 4 order by trade.created_at asc', [date('Y-m-d',strtotime($request->input('fd'))),date('Y-m-d',strtotime($request->input('td')))]);
         return $dat;
     }
