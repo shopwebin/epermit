@@ -248,11 +248,19 @@ class Trader_applyController extends Controller
         unset($input['ft']);
         unset($input['td']);
         unset($input['tt']);
-        $trade = DB::table('permit')->where('id', $id)->update($input);
+        $trade1 = DB::table('permit')->where('id', $id)->update($input);
         if(isset($input['submit'])){
+            $trade = new premit_model();
+            $data = [];
+            $data['dat'] = $trade->primary1($id)[0];
+            $data['dt'] = explode(' ', $data['dat']->valid_to);
+            $data['df'] = explode(' ', $data['dat']->valid_from);
             if($input['submit'] == 'SOS'){
-                
+                $data['type'] = 'Emergency Primary ';
+            } elseif($input['submit'] == '') {
+                $data['type'] = 'Early Arrival';
             }
+            return view('secondary-permit',$data);
         }else{
             return redirect('trade-list')->with('alert', 'Primary Premit updated Successfully');
         }
