@@ -237,13 +237,16 @@ class Trader_applyController extends Controller
     public function edit_pre_permit($id, Request $request)
     {
         $input = $request->all();
+        $data = [];
         if(isset($input['submit'])){
             $submit = $input['submit'];
             unset($input['submit']);
             if($submit == 'SOS'){
                 $input['c_status']=2;
+                $data['type'] = 'Primary Emergency ';
             } elseif($submit == 'Early Arrival') {
                 $input['c_status']=3;
+                $data['type'] = 'Early Arrival of Primary';
             }
         }
         $input['valid_from'] = $input['fd'].' '.$input['ft'];
@@ -257,18 +260,14 @@ class Trader_applyController extends Controller
         unset($input['ft']);
         unset($input['td']);
         unset($input['tt']);
+        // DB::enableQueryLog();
         $trade1 = DB::table('permit')->where('id', $id)->update($input);
+        // dd(DB::getQueryLog());
         if(isset($submit)){
             $trade = new premit_model();
-            $data = [];
             $data['dat'] = $trade->primary1($id)[0];
             $data['dt'] = explode(' ', $data['dat']->valid_to);
             $data['df'] = explode(' ', $data['dat']->valid_from);
-            if($submit == 'SOS'){
-                $data['type'] = 'Primary Emergency ';
-            } elseif($submit == 'Early Arrival') {
-                $data['type'] = 'Early Arrival of Primary';
-            }
             return view('secondary-permit',$data);
         }else{
             return redirect('trade-list')->with('alert', 'Primary Premit updated Successfully');
