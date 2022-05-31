@@ -227,7 +227,7 @@
                         </div>
                         <div class="col-md-4">
                             <div class="form-group">
-                                <label>Available Quantity(Balance Quantity {{ ($dat[0]->a_weight+$dat[0]->qty) }}@isset($dat[0]->qty_name) {{ $dat[0]->qty_name }} @endisset ) <span class="text-danger">*</span></label>
+                                <label> Quantity(Balance Quantity {{ ($dat[0]->a_weight+$dat[0]->qty) }}@isset($dat[0]->qty_name) {{ $dat[0]->qty_name }} @endisset ) <span class="text-danger">*</span></label>
                                 <input type="" value="{{ $dat[0]->a_weight }}" name="a_weight" class="form-control pri-form a_weight" required>
                                 <input type="hidden" name="bal_qty" class="bal_qty" value="{{$dat[0]->qty}}">
                             </div>

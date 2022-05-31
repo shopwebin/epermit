@@ -126,7 +126,7 @@
             </tr>
             <tr><td colspan="4"><hr /></td></tr>
             <tr>
-                <td colspan="4">Duration of the permit in force from {{$dat->valid_from}} PM @if(isset($dat->valid_to)) to {{$dat->valid_to}} @endif</td>
+                <td colspan="4">Duration of the permit in force from {{$dat->valid_from}} PM @if(isset($dat->valid_to)) to {{$dat->valid_to}}. @endif @if(isset($dat->c_reason)) Due to {{$dat->c_reason}} @endif</td>
             </tr>
             @if(isset($dat->c_reason)) <tr><td colspan="4"> Cancellation reason: {{$dat->c_reason}} </td></tr> @endif
             <tr><td colspan="4"><hr /></td></tr>
