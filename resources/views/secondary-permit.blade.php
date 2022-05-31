@@ -61,7 +61,7 @@
             </tr>
             <tr>
                 <td>Permit Type:</td>
-                <td>{{$type}} Permit</td>
+                <td>@if($dat->c_status == 2){{$type}} Emergency @elseif($dat->c_status == 3) Early Arrival of {{$type}} @elseif($dat->c_status == 0) Cancellation of {{$type}} @endif Permit</td>
                 <td></td>
                 <td></td>
             </tr>
@@ -126,9 +126,9 @@
             </tr>
             <tr><td colspan="4"><hr /></td></tr>
             <tr>
-                <td colspan="4">Duration of the permit in force from {{$dat->valid_from}} PM @if(isset($dat->valid_to)) to {{$dat->valid_to}}. @endif @if(isset($dat->c_reason)) Due to {{$dat->c_reason}} @endif</td>
+                <td colspan="4">Duration of the permit in force from {{$dat->valid_from}} PM @if(isset($dat->valid_to)) to {{$dat->valid_to}}. @endif {{--@if(isset($dat->c_reason)) Due to {{$dat->c_reason}} @endif --}}</td>
             </tr>
-            @if(isset($dat->c_reason)) <tr><td colspan="4"> Cancellation reason: {{$dat->c_reason}} </td></tr> @endif
+            {{-- @if(isset($dat->c_reason)) <tr><td colspan="4"> Cancellation reason: {{$dat->c_reason}} </td></tr> @endif --}}
             <tr><td colspan="4"><hr /></td></tr>
             <tr>
                 <td colspan="4">I declare that the information furnished above is true to the best of my knowledge & belief.</td>

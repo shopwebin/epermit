@@ -302,10 +302,11 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-4" style="">
+                        @if(isset($dt))
+                        <div class="col-md-4">
                             <div class="form-group">
                                 <label> Reason <span class="text-danger">*</span></label>
-                                <input type="text" class="c_reason form-control pri-form">
+                                <input type="text" name="c_reason" class="c_reason form-control pri-form">
                                 <!--select class="c_reason form-control pri-form">
                                     <option value="">Select</option>
                                     <option value="Natural Disaster">Natural Disaster</option>
@@ -319,14 +320,15 @@
                                 <input type="number" class="c_qty form-control pri-form">
                             </div>
                         </div>
+                        @endif
                         <div class="col-12 text-center">
                         @if(isset($dt))
-                            @if((strtotime($dt[0]." ".$dt[1]) > time()) && ($dat->c_status == 1))
+                            {{-- @if((strtotime($dt[0]." ".$dt[1]) > time()) && ($dat[0]->c_status == 1)) --}}
                                 <input type="submit" value="Early Arrival" class="btn" name="submit">
                                 <input type="submit" value="SOS" class="btn" name="submit">
                                 <button id="cancelbtn" class="btn">Cancel Permit</button>
                                 <input type="submit" name="" class="btn" value="Edit Permit">
-                            @endif
+                            {{--@endif--}}
                         @else
                             <input type="submit" name="" class="btn" value="Create Permit">
                         @endif
@@ -337,7 +339,7 @@
                 </form>
                 <form action="{{url('cancel-permit')}}" method="post" class="form2">
                 @csrf    
-                <input type="hidden" name="c_qty" class="c_qty1">
+                    <input type="hidden" name="c_qty" class="c_qty1">
                     <input type="hidden" name="c_reason" class="c_reason1">
                     <input type="hidden" name="id" class="c_id1">
                     <input type="hidden" name="tid" class="c_tid1">
