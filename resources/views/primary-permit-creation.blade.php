@@ -302,21 +302,21 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-4">
+                        <div class="col-md-4" style="">
                             <div class="form-group">
-                                <label for=""> Cancelled Quantity </label>
-                                <input type="number" class="c_qty form-control pri-form">
-                            </div>
-                        </div>
-                        <div class="col-md-4 c_r" style="display: none;">
-                            <div class="form-group">
-                                <label>Cancelation Reason <span class="text-danger">*</span></label>
+                                <label> Reason <span class="text-danger">*</span></label>
                                 <input type="text" class="c_reason form-control pri-form">
                                 <!--select class="c_reason form-control pri-form">
                                     <option value="">Select</option>
                                     <option value="Natural Disaster">Natural Disaster</option>
                                     <option value="Product Damaged and Returned">Product Damaged and Returned</option>
                                 </select-->
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for=""> Cancelled Quantity </label>
+                                <input type="number" class="c_qty form-control pri-form">
                             </div>
                         </div>
                         <div class="col-12 text-center">
