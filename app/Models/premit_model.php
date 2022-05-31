@@ -68,7 +68,8 @@ class premit_model extends Model
             'veh_id' => $request->input('veh_id'),
             'mobile' => $request->input('mobile'),
             'from_date' => $request->input('fd').' '.$request->input('ft'),
-            'to_date' => $request->input('td').' '.$request->input('tt')
+            'to_date' => $request->input('td').' '.$request->input('tt'),
+            'invoice' => $request->input('invoice')
         ]);
         DB::select('update `trade` set  `a_weight` = `a_weight` - '.$request->input('a_weight').' where `id` = '.substr($request->input('t_id'),1));
         return $id;

@@ -255,7 +255,7 @@
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label>Trade Value (INR) <span class="text-danger">*</span></label>
-                                <input type="" name="trade_val" class="trade_val form-control pri-form" readonly  value="@isset($dat){{($dat[0]->a_weight * $dat[0]->amt)}}@endisset">
+                                <input type="" name="trade_val" class="trade_val form-control pri-form" value="@isset($dat){{($dat[0]->a_weight * $dat[0]->amt)}}@endisset">
                             </div>
                         </div>
                         <div class="col-md-4">
@@ -301,7 +301,7 @@
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label for=""> Sales Invoice/Reciept </label>
-                                <input type="" class="invoice form-control pri-form" name= "incoice">
+                                <input type="" class="invoice form-control pri-form" name="incoice">
                             </div>
                         </div>
                         @if(isset($dt))
