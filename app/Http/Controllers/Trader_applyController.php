@@ -236,11 +236,16 @@ class Trader_applyController extends Controller
 
     public function edit_pre_permit($id, Request $request)
     {
+        $input = $request->all();
         if(isset($input['submit'])){
             $submit = $input['submit'];
             unset($input['submit']);
+            if($submit == 'SOS'){
+                $input['c_status']=2;
+            } elseif($submit == 'Early Arrival') {
+                $input['c_status']=3;
+            }
         }
-        $input = $request->all();
         $input['valid_from'] = $input['fd'].' '.$input['ft'];
         $input['valid_to'] = $input['td'].' '.$input['tt'];
         $id = $input['id'];
@@ -260,7 +265,7 @@ class Trader_applyController extends Controller
             $data['dt'] = explode(' ', $data['dat']->valid_to);
             $data['df'] = explode(' ', $data['dat']->valid_from);
             if($submit == 'SOS'){
-                $data['type'] = 'Emergency of Primary ';
+                $data['type'] = 'Primary Emergency ';
             } elseif($submit == 'Early Arrival') {
                 $data['type'] = 'Early Arrival of Primary';
             }
@@ -336,7 +341,7 @@ class Trader_applyController extends Controller
 
     public function convert(Request $request){
         $trade = new tradelist_model();
-        $dat = $trade->convert($request);        
+        $dat = $trade->convert($request);
         return redirect("trade-list")->with('alert','New trade id is T'.$dat->id)->with('dat',$dat);
     }
 
