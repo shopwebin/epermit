@@ -173,7 +173,7 @@ class Trader_applyController extends Controller
             // var_dump($data);
             $data['dt'] = explode(' ', $data['dat']->valid_to);
             $data['df'] = explode(' ', $data['dat']->valid_from);
-            $data['type'] = 'Cancellation of Primary';
+            $data['type'] = 'Primary';
             // DB::enableQueryLog();  
             // var_dump($data['dat']);
             if($data['dat']->c_status){                
@@ -194,7 +194,7 @@ class Trader_applyController extends Controller
                 DB::update('update trade set a_weight = a_weight + ? where id = ?',[$data['dat']->a_weight,$data['dat']->t_id]);
                 $query = $trade->scancel(substr($id, 1));
             }
-            $data['type'] = 'Cancellation of Secondary';
+            $data['type'] = 'Secondary';
         }
         // dd(DB::getQueryLog());
         return view('secondary-permit',$data);
@@ -243,10 +243,8 @@ class Trader_applyController extends Controller
             unset($input['submit']);
             if($submit == 'SOS'){
                 $input['c_status']=2;
-                $data['type'] = 'Primary Emergency ';
             } elseif($submit == 'Early Arrival') {
                 $input['c_status']=3;
-                $data['type'] = 'Early Arrival of Primary';
             }
         }
         $input['valid_from'] = $input['fd'].' '.$input['ft'];
@@ -268,6 +266,7 @@ class Trader_applyController extends Controller
             $data['dat'] = $trade->primary1($id)[0];
             $data['dt'] = explode(' ', $data['dat']->valid_to);
             $data['df'] = explode(' ', $data['dat']->valid_from);
+            $data['type'] = 'Primary';
             return view('secondary-permit',$data);
         }else{
             return redirect('trade-list')->with('alert', 'Primary Premit updated Successfully');
