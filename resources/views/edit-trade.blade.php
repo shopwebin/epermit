@@ -323,6 +323,7 @@
                         <div class="col-md-3">
                             <div class="form-group">
                                 <label>Commodity <span class="text-danger">*</span></label>
+                                @php var_dump($commodity); @endphp
                                 @foreach($commodity as $com)@if($com->com_id == $view[0]->commodity_id)<input type="" name="c_id" value="{{ $view[0]->com_name }}" class="form-control pri-form" readonly>@endif @endforeach
                             </div>
                         </div>

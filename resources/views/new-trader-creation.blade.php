@@ -96,6 +96,23 @@
                                     $(".m_fee").val(($(".trade_value").val() * {{$mfee[0]->percent}})/100);
                                 });
                             });
+                            function com_val_1(){
+                                var c = $(".commodity").val();
+                                    var q = $(".quantity").val();
+                                    var w = $('.weight').val();
+                                    if(!empty(c) && !empty(q) && !empty(w)){
+                                        $.ajax({
+                                            type:'POST',
+                                            url: "com_val",
+                                            data: { com:c, qty:q },
+                                            success:function(data){
+                                                console.log(data[0].amt);
+                                                $('.trade_value').val(w * data[0].amt);
+                                                $('.m_fee').val(w * data[0].amt* {{$mfee[0]->percent}}/100);
+                                            }
+                                        });
+                                    }
+                            }
                             $(document).ready(function() {
                                 $(".weight").change(function() {
                                     var c = $(".commodity").val();
@@ -106,7 +123,7 @@
                                         url: "com_val",
                                         data: { com:c, qty:q },
                                         success:function(data){
-                                            // console.log(data[0].amt);
+                                            console.log(data[0].amt);
                                             $('.trade_value').val(w * data[0].amt);
                                             $('.m_fee').val(w * data[0].amt* {{$mfee[0]->percent}}/100);
                                         }
@@ -137,7 +154,7 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label>Commodity <span class="text-danger">*</span></label>
-                                    <select class="form-control pri-form commodity" name="commodity">
+                                    <select class="form-control pri-form commodity" name="commodity" onchange="com_val_1">
                                         <option>Select</option>
                                         @foreach($commodity as $cdy)
                                         <option value="{{ $cdy->com_id }}">{{ $cdy->com_name }}</option>
@@ -148,7 +165,7 @@
                             <div class="col-md-2">
                                 <div class="form-group">
                                     <label>Quantity Units <span class="text-danger">*</span></label>
-                                    <select class="form-control pri-form quantity" name="quantity">
+                                    <select class="form-control pri-form quantity" name="quantity" onchange="com_val_1">
                                         <option>Select</option>
                                         @foreach($quantity as $qty)
                                         <option value="{{$qty->id}}">{{$qty->qty_name}}</option>
