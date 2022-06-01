@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@if($dat->c_status == 2){{$type}} Emergency @elseif($dat->c_status == 3) Early Arrival of {{$type}} @elseif($dat->c_status == 0) Cancellation of {{$type}} @endif Permit</title>
+    <title>@if(isset($dat->c_status))@if($dat->c_status == 2){{$type}} Emergency @elseif($dat->c_status == 3) Early Arrival of {{$type}} @elseif($dat->c_status == 0) Cancellation of {{$type}} @endif @else {{$type}} @endif Permit</title>
     <style>
         body{font-family: Arial, Helvetica, sans-serif; font-size: 16px;}
         .table{width: 100%;}
@@ -61,7 +61,11 @@
             </tr>
             <tr>
                 <td>Permit Type:</td>
-                <td>@if($dat->c_status == 2){{$type}} Emergency @elseif($dat->c_status == 3) Early Arrival of {{$type}} @elseif($dat->c_status == 0) Cancellation of {{$type}} @endif Permit</td>
+                <td>@if(isset($dat->c_status) &&  ($dat->c_status != 1))
+                    @if($dat->c_status == 2){{$type}} Emergency 
+                    @elseif($dat->c_status == 3) Early Arrival of {{$type}} 
+                    @elseif($dat->c_status == 0) Cancellation of {{$type}} @endif 
+                    @else {{$type}} @endif Permit</td>
                 <td></td>
                 <td></td>
             </tr>

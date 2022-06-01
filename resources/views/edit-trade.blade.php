@@ -231,13 +231,13 @@
                         </div>
                     </div><div class="col-md-4">
                             <div class="form-group">
-                                <label>Address line 1<span class="text-danger">*</span></label>
+                                <label> Source Address <span class="text-danger">*</span></label>
                                 <input type="text" name="ad1" class="form-control pri-form" required>
                             </div>
                         </div>
                         <div class="col-md-4">
                             <div class="form-group">
-                                <label>Address line 2<span class="text-danger">*</span></label>
+                                <label> Destination Address <span class="text-danger">*</span></label>
                                 <input type="text" name="ad2" class="form-control pri-form"  required>
                             </div>
                         </div>

@@ -144,7 +144,7 @@
                             });
                 </script>
                 <h5 class="mt-3">Consignee Details</h5>
-                @if(isset($dat[0]->ad2))
+                @if(isset($dat[0]->veh_id))
                 <form action="{{url('secondary/permit/edit')}}" method="post">
                 @else
                 <form action="{{url('secondary/permit/add')}}" method="post">
@@ -301,7 +301,7 @@
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label for=""> Sales Invoice/Reciept </label>
-                                <input type="" class="invoice form-control pri-form" name="incoice">
+                                <input type="" class="invoice form-control pri-form" name="invoice">
                             </div>
                         </div>
                         @if(isset($dt))

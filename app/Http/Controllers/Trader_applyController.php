@@ -183,7 +183,7 @@ class Trader_applyController extends Controller
             }
         }
         elseif ($id['id'][0] == 'S'){
-            $data['dat'] = $trade->secondary1(substr($id, 1))[0];
+            $data['dat'] = $trade->secondary1(substr($id['id'], 1))[0];
             $data['dat']->value = $data['dat']->amt * $data['dat']->a_weight;
             $data['dat']->veh_detail = $data['dat']->veh_id;
             $data['dat']->valid_to = $data['dat']->to_date;
@@ -192,7 +192,7 @@ class Trader_applyController extends Controller
             $data['df'] = explode(' ', $data['dat']->from_date);
             if($data['dat']->c_status){
                 DB::update('update trade set a_weight = a_weight + ? where id = ?',[$data['dat']->a_weight,$data['dat']->t_id]);
-                $query = $trade->scancel(substr($id, 1));
+                $query = $trade->scancel(substr($id['id'], 1));
             }
             $data['type'] = 'Secondary';
         }
