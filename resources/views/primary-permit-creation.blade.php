@@ -323,12 +323,12 @@
                         @endif
                         <div class="col-12 text-center">
                         @if(isset($dt))
-                            {{-- @if((strtotime($dt[0]." ".$dt[1]) > time()) && ($dat[0]->c_status == 1)) --}}
+                             @if((strtotime($dt[0]." ".$dt[1]) > time()) && ($dat[0]->c_status == 1)) 
                                 <input type="submit" value="Early Arrival" class="btn" name="submit">
                                 <input type="submit" value="SOS" class="btn" name="submit">
                                 <button id="cancelbtn" class="btn">Cancel Permit</button>
                                 <input type="submit" name="" class="btn" value="Edit Permit">
-                            {{--@endif--}}
+                            @endif
                         @else
                             <input type="submit" name="" class="btn" value="Create Permit">
                         @endif

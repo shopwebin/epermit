@@ -67,7 +67,11 @@
                                         @endforeach
                                     @endif
                                     @if(isset($td->permit_id))
+                                    @if(strtotime($dt[0]." ".$dt[1]) > time())
+                                    <a href="permit-creation/P{{ $td->permit_id }}" class="btn btn-info">View Permit-P{{ $td->permit_id }}</a>
+                                    @else
                                     <a href="permit-creation/P{{ $td->permit_id }}" class="btn btn-info">Edit Permit-P{{ $td->permit_id }}</a>
+                                    @endif
                                     @endif
                                 @endif
                                 <a href="edit-trade/T{{ $td->id }}" class="btn btn-info">Edit Trade</a>
