@@ -7,6 +7,7 @@ use App\Models\quantity_model;
 use App\Models\mfee;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
 
 class AdminController extends Controller
 {
@@ -97,4 +98,15 @@ class AdminController extends Controller
         $query = $mfee->qty_update($request);
         return redirect('quantity')->with('alert','Updated Sucessfully');
     }
+
+    public function send_mail()
+    {
+        $details = [
+            'title' => 'Mail from ItSolutionStuff.com',
+            'body' => 'This is for testing email using smtp'
+        ];
+        
+        Mail::to('nidavew271@runchet.com')->send(new \App\Mail\MyTestMail($details));
+    }
+
 }

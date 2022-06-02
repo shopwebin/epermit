@@ -77,14 +77,14 @@
                                 @endphp
                                 @foreach($dat3 as $i=>$dt2)
                                 <tr data-toggle="collapse" data-target="#demo1{{$i}}" class="accordion-toggle">
-                                    <td><button class="btn btn-default btn-xs">{{$dt2->amc}}</td>
-                                    <td>T{{$dt2->id}}</td>
-                                    <td>{{$dt2->trade_type}}</td>
-                                    <td>{{$dt2->cty}}</td>
-                                    <td>{{$dt2->created_at}}</td>
-                                    <td>{{$dt2->a_weight}}</td>
-                                    <td>{{$dt2->qty}}</td>
-                                    <td>Rs {{$dt2->trade_value}}</td>
+                                    <td colspan=2><button class="btn btn-default btn-xs">{{$dt2->amc}}</td>
+                                    <td>{{-- $dt2->id --}}</td>
+                                    <td>{{-- $dt2->trade_type --}}</td>
+                                    <td>{{-- $dt2->cty --}}</td>
+                                    <td>{{-- $dt2->created_at --}}</td>
+                                    <td>{{-- $dt2->a_weight --}}</td>
+                                    <td>{{-- $dt2->qty </td>
+                                    <td> Rs $dt2->trade_value --}}</td>
                                 </tr>
                                 @foreach($sad[$i] as $j=>$sd)
                                 @php
@@ -165,14 +165,14 @@
                                 @foreach($dat4 as $i=>$d)
                                 <tr  data-toggle="collapse" data-target="#demo{{$i}}" class="accordion-toggle">
                                     <td><button class="btn btn-default btn-xs" style="max-width:9vw;">{{$d->cty}}</button></td>
-                                    <td>T{{$d->id}}</td>
-                                    <td>{{$d->amc}}</td>
-                                    <td>{{$d->trade_type}}</td>
-                                    <td>{{$d->weight}}</td>
-                                    <td>{{$d->created_at}}</td>
-                                    <td>{{$d->a_weight}}</td>
-                                    <td>{{$d->qty}}</td>
-                                    <td>{{$d->trade_value}}</td>
+                                    <td>{{-- T$d->id --}}</td>
+                                    <td>{{-- $d->amc --}}</td>
+                                    <td>{{-- $d->trade_type --}}</td>
+                                    <td>{{-- $d->weight --}}</td>
+                                    <td>{{-- $d->created_at --}}</td>
+                                    <td>{{-- $d->a_weight --}}</td>
+                                    <td>{{-- $d->qty --}}</td>
+                                    <td>{{-- $d->trade_value --}}</td>
                                 </tr>
                                 @foreach($sad[$i] as $j=>$sd)
                                 @php

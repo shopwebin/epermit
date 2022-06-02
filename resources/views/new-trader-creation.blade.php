@@ -156,12 +156,12 @@
                         <div class="row">
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label>Commodity <span class="text-danger">*</span></label>
+                                    <label> Commodity <span class="text-danger">*</span></label>
                                     <select class="form-control pri-form commodity" name="commodity" onchange="com_val_1()">
                                         <option>Select</option>
                                         @foreach($commodity as $cdy)
                                         <option value="{{ $cdy->com_id }}">{{ $cdy->com_name }}</option>
-                                        @endforeach
+                                        @endforeach 
                                     </select>
                                 </div>
                             </div>

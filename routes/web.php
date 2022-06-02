@@ -105,6 +105,19 @@ Route::get('/market_fee/edit/{id}', [AdminController::class,'mfee_edit']);
 
 Route::get('/market_fee/delete/{id}', [AdminController::class,'mfee_delete']);
 
+Route::get('send-mail', function () {
+   
+    $details = [
+        'title' => 'Mail from ItSolutionStuff.com',
+        'body' => 'This is for testing email using smtp'
+    ];
+   
+    \Mail::to('nidavew271@runchet.com')->send(new \App\Mail\MyTestMail($details));
+   
+    dd("Email is Sent.");
+});
+// Route::post('/send-mail',[AdminController::class,'send_mail']);
+
 Route::post('/cancel-permit',[Trader_applyController::class,'cancel_permit']);
 
 Route::post('/history_trade_date',[Trader_applyController::class,'trade_history_date']);
