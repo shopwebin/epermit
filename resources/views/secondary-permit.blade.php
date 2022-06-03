@@ -29,7 +29,7 @@
                 <td colspan="4" style="padding: 10px;">
                     <table border="0" cellpadding="4" cellspacing="0" class="table">
                         <tr>
-                            <a href="{{url('trade-list')}}"><td style="width: 25%;"><img src="{{url('images')}}/Secondary-Permit_06.png" alt="logo" style="width: 170px;" /></td></a>
+                            <td style="width: 25%;"><a href="{{url('trade-list')}}"><img src="{{url('images')}}/Secondary-Permit_06.png" alt="logo" style="width: 170px;" /></a></td>
                             <td style="text-align: center;width: 50%; font-size: 18px;">
                                 The Andhra Pradesh Agricultural<br />
                                 (Agri Produce & Livestock)<br />

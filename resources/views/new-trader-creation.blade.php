@@ -221,8 +221,12 @@
         <i class="priya-close" onclick="helpModalHide(this)"></i>
         <header>Select Payment Gateway</header>
         <section>
+        <form action="pay" method="post">
             <div class="row">
                 <div class="col-md-6">
+                @csrf
+                <input type="hidden" name="amount" value="1">
+                <input type="hidden" name="order" value="13">
                     <h3>SBI Charges</h3>
                     <ul>
                         <li> Net Banking:
@@ -239,7 +243,8 @@
                             </ul>
                         </li>
                     </ul>
-                    <button type="button" class="btn btn-info" onclick="sub()">SBI</button>
+                    <!--button type="button" class="btn btn-info" onclick="sub()">SBI</button-->
+                    <button type="submit" class="btn btn-info">SBI</button>
                 </div>
                 <div class="col-md-6">
                     <h3>PAYU Charges</h3>
@@ -250,16 +255,28 @@
                         <li>UPI: INR 12 per transaction</li>
                         <li>Taxes as applicable</li>
                     </ul>
-                    <button type="button" class="btn btn-info"  onclick="sub()">PAYU</button>
+                    <button type="submit" class="btn btn-info">PAYU</button>
+                    <!--button type="button" class="btn btn-info"  onclick="sub()">PAYU</button-->
                 </div>
             </div>
         </section>
+        </form>
     </div>
 </div>
 <script>
     function sub(){
+        $.ajax({
+            type: 'POST',
+            url: "{{url('pay')}}",
+            data: {
+                order_no: "123"
+            },
+            success: function(data) {
+                console.log(data);
+            }
+        });
         $('.p_status').val(1);
-        $('.form1').submit();
+        // $('.form1').submit();
     }
 </script>
 </body>

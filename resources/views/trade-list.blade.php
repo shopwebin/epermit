@@ -60,18 +60,15 @@
                                     @else
                                         <a href="permit-creation/T{{ $td->id }}" class="btn btn-info">Create Permit</a>
                                     @endif
-                                    @endif
+                                @endif
                                     @if($td->p_status > 2) 
                                         @foreach($td->sec as $sec)                                      
-                                            <a href="secondary-permit-creation/S{{$sec->id}}" class="btn btn-info">Edit Permit-S{{$sec->id}}</a>
+                                           
+                                                <a href="secondary-permit-creation/S{{$sec->id}}" class="btn btn-info">Edit Permit-S{{$sec->id}}</a>
                                         @endforeach
                                     @endif
                                     @if(isset($td->permit_id))
-                                    @if(strtotime($dt[0]." ".$dt[1]) > time())
-                                    <a href="permit-creation/P{{ $td->permit_id }}" class="btn btn-info">View Permit-P{{ $td->permit_id }}</a>
-                                    @else
-                                    <a href="permit-creation/P{{ $td->permit_id }}" class="btn btn-info">Edit Permit-P{{ $td->permit_id }}</a>
-                                    @endif
+                                            <a href="permit-creation/P{{ $td->permit_id }}" class="btn btn-info">Edit Permit-P{{ $td->permit_id }}</a>
                                     @endif
                                 @endif
                                 <a href="edit-trade/T{{ $td->id }}" class="btn btn-info">Edit Trade</a>

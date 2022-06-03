@@ -7,6 +7,7 @@ use App\Http\Controllers\Trader_applyController;
 use App\Http\Controllers\AmcController;
 use App\Http\Controllers\CommodityController;
 use App\Http\Controllers\ConsolidateController;
+use Illuminate\Support\Facades\Mail;
 // use Illuminate\Routing\Route;
 use Illuminate\Support\Facades\Route;
 
@@ -111,12 +112,17 @@ Route::get('send-mail', function () {
         'title' => 'Mail from ItSolutionStuff.com',
         'body' => 'This is for testing email using smtp'
     ];
-   
-    \Mail::to('nidavew271@runchet.com')->send(new \App\Mail\MyTestMail($details));
-   
+    $user['to']='97zg42wqil@popcornfly.com';
+    Mail::to('97zg42wqil@popcornfly.com')->send(new \App\Mail\MyTestMail($details));
+   /*Mail::send('mail',$details,function($message) use ($user){
+       $message->to($user['to']);
+       $message->subject('hello Details');
+   });*/
     dd("Email is Sent.");
 });
 // Route::post('/send-mail',[AdminController::class,'send_mail']);
+
+Route::post('/pay',[Trader_applyController::class,'payment']);
 
 Route::post('/cancel-permit',[Trader_applyController::class,'cancel_permit']);
 

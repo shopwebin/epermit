@@ -370,4 +370,11 @@ class Trader_applyController extends Controller
         // var_dump($temp);
         return redirect('historical-trade')->with('trade',$temp);
     }
+
+    public function payment(Request $request)
+    {
+        $input = $request->all();
+        $data['dat'] = $input;
+        return view('ccavenue',$data);
+    }
 }
