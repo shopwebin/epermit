@@ -7,6 +7,8 @@ use App\Http\Controllers\Trader_applyController;
 use App\Http\Controllers\AmcController;
 use App\Http\Controllers\CommodityController;
 use App\Http\Controllers\ConsolidateController;
+use App\Mail\MyTestMail;
+use App\Mail\WelcomeMail;
 use Illuminate\Support\Facades\Mail;
 // use Illuminate\Routing\Route;
 use Illuminate\Support\Facades\Route;
@@ -106,7 +108,7 @@ Route::get('/market_fee/edit/{id}', [AdminController::class,'mfee_edit']);
 
 Route::get('/market_fee/delete/{id}', [AdminController::class,'mfee_delete']);
 
-Route::get('send-mail', function () {
+/*Route::get('send-mail', function () {
    
     $details = [
         'title' => 'Mail from ItSolutionStuff.com',
@@ -117,10 +119,19 @@ Route::get('send-mail', function () {
    /*Mail::send('mail',$details,function($message) use ($user){
        $message->to($user['to']);
        $message->subject('hello Details');
-   });*/
+   });
     dd("Email is Sent.");
-});
+});*/
 // Route::post('/send-mail',[AdminController::class,'send_mail']);
+
+Route::get('/send-mail',[AdminController::class,'send_mail']);
+
+/*Route::get('/send-mail',function(){
+    // Mail::to('97zg42wqil@popcornfly.com')->send(new MyTestMail());
+    // return new MyTestMail();
+    Mail::to('97zg42wqil@popcornfly.com')->send(new WelcomeMail());
+    return new WelcomeMail();
+});*/
 
 Route::post('/pay',[Trader_applyController::class,'payment']);
 

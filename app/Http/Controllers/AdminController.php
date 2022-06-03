@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
 
+
 class AdminController extends Controller
 {
     static function com(){
@@ -105,8 +106,14 @@ class AdminController extends Controller
             'title' => 'Mail from ItSolutionStuff.com',
             'body' => 'This is for testing email using smtp'
         ];
-        
-        Mail::to('nidavew271@runchet.com')->send(new \App\Mail\MyTestMail($details));
+        $data=['name'=>"temp","data"=>"tesating"];
+        $user['to']='6awo5iz6r3@crossmailjet.com';
+        // Mail::to('nidavew271@runchet.com')->send(new \App\Mail\MyTestMail($details));
+        Mail::send('emails.myTestMail',$data,function($message) use ($user){
+           $message->to($user['to']);
+           $message->from('amcolms@gmail.com','amcolms@gmail.com');
+           $message->subject("Hello Dev");
+        });
     }
 
 }
