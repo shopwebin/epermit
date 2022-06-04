@@ -107,7 +107,7 @@ class AdminController extends Controller
             'body' => 'This is for testing email using smtp'
         ];
         $data=['name'=>"temp","data"=>"tesating"];
-        $user['to']='6awo5iz6r3@crossmailjet.com';
+        $user['to']='t50bh8vfsj@blondemorkin.com';
         // Mail::to('nidavew271@runchet.com')->send(new \App\Mail\MyTestMail($details));
         Mail::send('emails.myTestMail',$data,function($message) use ($user){
            $message->to($user['to']);
