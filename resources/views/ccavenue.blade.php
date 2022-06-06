@@ -43,12 +43,9 @@
 		    {
 				$binString=$packedString;
 		    } 
-        	    
-		    else 
-		    {
+		    else {
 				$binString.=$packedString;
 		    } 
-        	    
 		    $count+=2; 
         	} 
   	        return $binString; 
@@ -69,7 +66,8 @@ $merchant_json_data =   array(
 // var_dump($merchant_json_data);
 $merchant_data = json_encode($merchant_json_data);
 $encrypted_data = encrypt1($merchant_data, $working_key);
-$final_data = 'enc_request='.$encrypted_data.'&access_code='.$access_code.'&command=orderStatusTracker&request_type=JSON&response_type=JSON';
+$final_data = 'enc_request='.$encrypted_data.'&access_code='.$access_code.'&command=orderStatusTracker&request_type=JSON&response_type=JSON&version=1.1';
+echo $final_data;
 $ch = curl_init();
 curl_setopt($ch, CURLOPT_URL, "https://apitest.ccavenue.com/apis/servlet/DoWebTrans");
 curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
@@ -83,7 +81,6 @@ $result = curl_exec($ch);
 curl_close($ch);
 $status = '';
 $information = explode('&', $result);
-
 $dataSize = sizeof($information);
 for ($i = 0; $i < $dataSize; $i++) {
     $info_value = explode('=', $information[$i]);
