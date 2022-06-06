@@ -57,8 +57,8 @@
 
 <?php
 error_reporting(0);
-$working_key = 'TQGFW6GWE9EJLV1B'; //Shared by CCAVENUES // kk TQGFW6GWE9EJLV1B tester.java
-$access_code = 'B9C9FB9A596424141A40A029B646BA7F'; // kk B9C9FB9A596424141A40A029B646BA7F, reference_no='205000184724 tester.java
+$working_key = 'B12BF069204682E24EA48ED8D9CF1158'; //Shared by CCAVENUES // kk TQGFW6GWE9EJLV1B tester.java
+$access_code = 'AVHT04JD21AH10THHA'; // kk B9C9FB9A596424141A40A029B646BA7F, reference_no='205000184724 tester.java
 
 $merchant_json_data =   array(
     'order_no' => '{{$dat["order"]}}',
@@ -66,7 +66,7 @@ $merchant_json_data =   array(
     'amount' => '{{$dat["order"]}}'
 );
 
-var_dump($merchant_json_data);
+// var_dump($merchant_json_data);
 $merchant_data = json_encode($merchant_json_data);
 $encrypted_data = encrypt1($merchant_data, $working_key);
 $final_data = 'enc_request='.$encrypted_data.'&access_code='.$access_code.'&command=orderStatusTracker&request_type=JSON&response_type=JSON';
@@ -74,7 +74,7 @@ $ch = curl_init();
 curl_setopt($ch, CURLOPT_URL, "https://apitest.ccavenue.com/apis/servlet/DoWebTrans");
 curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
 curl_setopt($ch, CURLOPT_VERBOSE, 1);
-curl_setopt($ch, CURLOPT_HTTPHEADER,'Content-Type: application/json') ;
+curl_setopt($ch, CURLOPT_HTTPHEADER,array('Content-Type: application/json'));
 curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
 curl_setopt($ch, CURLOPT_POST, 1);
 curl_setopt($ch, CURLOPT_POSTFIELDS, $final_data);
@@ -89,7 +89,6 @@ for ($i = 0; $i < $dataSize; $i++) {
     $info_value = explode('=', $information[$i]);
     if ($info_value[0] == 'enc_response') {
 	$status = decrypt1(trim($info_value[1]), $working_key);
-	
     }
 }
 

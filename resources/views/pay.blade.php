@@ -1,12 +1,13 @@
 <?php
 error_reporting(0);
-$working_key = ''; //Shared by CCAVENUES // kk TQGFW6GWE9EJLV1B tester.java
-$access_code = ''; // kk B9C9FB9A596424141A40A029B646BA7F, reference_no='205000184724 tester.java
+$working_key = 'B12BF069204682E24EA48ED8D9CF1158'; //Shared by CCAVENUES // kk TQGFW6GWE9EJLV1B tester.java
+$access_code = 'AVHT04JD21AH10THHA'; // kk B9C9FB9A596424141A40A029B646BA7F, reference_no='205000184724 tester.java
 
 $merchant_json_data =
     array(
-    'order_no' => '',
-	'reference_no' =>''
+    'order_no' => '121',
+	'reference_no' =>'121',
+	'id' => '881246'
 );
 
 $merchant_data = json_encode($merchant_json_data);
@@ -16,13 +17,14 @@ $ch = curl_init();
 curl_setopt($ch, CURLOPT_URL, "https://apitest.ccavenue.com/apis/servlet/DoWebTrans");
 curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
 curl_setopt($ch, CURLOPT_VERBOSE, 1);
-curl_setopt($ch, CURLOPT_HTTPHEADER,'Content-Type: application/json') ;
+curl_setopt($ch, CURLOPT_HTTPHEADER,'Content-Type: application/array') ;
 curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
 curl_setopt($ch, CURLOPT_POST, 1);
 curl_setopt($ch, CURLOPT_POSTFIELDS, $final_data);
 // Get server response ...
 $result = curl_exec($ch);
 curl_close($ch);
+echo $final_data;
 $status = '';
 $information = explode('&', $result);
 

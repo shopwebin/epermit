@@ -295,14 +295,16 @@ class Trader_applyController extends Controller
         }else{
         $a['p_status'] = 1;
         DB::table('trade')->where('id',$id)->update($a);
-        return redirect()->back()->with('alert',"Paid Successfully");
+        // return redirect()->back()->with('alert',"Paid Successfully");
+        return view('pay');
         /* 
             DB::enableQueryLog();
             $sql = DB::getQueryLog();
             $query = end($sql);
             var_dump($query);
             return $query; */
-    }}
+        }
+    }
 
     public function add(Request $request){
         /*$this->validate($request,[
