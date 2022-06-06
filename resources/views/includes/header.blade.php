@@ -204,8 +204,8 @@
                         <ul class="ico-menu">
                             <li>    <label><i class="priya-dashboard"></i> <a href="{{url('commodity')}}">Commodity</a><input type="checkbox" /></label>
                             <!-- <li>    <label><i class="priya-dashboard"></i> <a href="{{url('secondary-permit-creation')}}">Secondary Permit Creation</a><input type="checkbox" /></label> -->
-                            </li>
-                            <li>    <label><i class="priya-dashboard"></i> <a href="{{url('edit-trade-for-multicommodities')}}">Edit Trade for Multicommodities</a><input type="checkbox" /></label>
+                            <!-- </li> -->
+                            <!-- <li>    <label><i class="priya-dashboard"></i> <a href="{{url('edit-trade-for-multicommodities')}}">Edit Trade for Multicommodities</a><input type="checkbox" /></label> -->
                             </li>
                         </ul>
                     </div>

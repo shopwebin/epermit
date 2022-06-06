@@ -50,7 +50,7 @@
                                     <button class="btn btn-info">Paid</button>
                                 @endif
                                 {{--@if(($td->a_weight > 0 ) && ($td->trade_type != 'Stock'))--}}
-                                @if(($td->trade_type != 'Stock'))
+                                @if(($td->trade_type != 'Stock') && ($td->p_status % 2 != 0))
                                 @if(($td->a_weight >0))
                                     @if(isset($td->permit_id))
                                         <a href="secondary-permit-creation/T{{ $td->id }}" class="btn btn-info">Create Secondary Permit</a>
@@ -71,7 +71,9 @@
                                             <a href="permit-creation/P{{ $td->permit_id }}" class="btn btn-info">Edit Permit-P{{ $td->permit_id }}</a>
                                     @endif
                                 @endif
-                                <a href="edit-trade/T{{ $td->id }}" class="btn btn-info">Edit Trade</a>
+                                @if($td->p_status % 2 != 0)
+                                    <a href="edit-trade/T{{ $td->id }}" class="btn btn-info">Edit Trade</a>
+                                @endif
                             </td>
                         </tr>
                         @endforeach
