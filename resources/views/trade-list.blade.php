@@ -34,14 +34,27 @@
                     </thead>
                     <tbody>
                         @foreach($dat as $td)
+                        @php
+                        $td->cty = '';
+                        $td->weight = 0;
+                        $td->a_weight = 0;
+                        $td->trade_value = 0;
+                            foreach($td->trade_com as $tc){
+                                $td->cty .= ','.$tc->cty;
+                                $td->weight+=$tc->weight;
+                                $td->a_weight+=$tc->a_weight;
+                                $td->trade_value+=$tc->trade_value;
+                            }
+                            $td->cty = substr($td->cty,1);
+                        @endphp
                         <tr>
                             <td data-id="{{ $td->id }}" data-p_status="{{ $td->id }}">T{{ $td->id }}</td>
                             <td>{{ $td->trade_type }}</td>
                             <td>{{ $td->amc }}</td>
                             <td>{{explode(' ',$td->created_at)[0]}}</td>
                             <td>{{ $td->cty }}</td>
-                            <td>{{ $td->weight }} {{$td->qty}}</td>
-                            <td>{{ $td->a_weight }} {{$td->qty}}</td>
+                            <td>{{ $td->weight }} {{--$td->qty--}}</td>
+                            <td>{{ $td->a_weight }} {{--$td->qty--}}</td>
                             <td>Rs {{ $td->trade_value }}</td>
                             <td>
                                 @if($td->p_status % 2 == 0)

@@ -19,7 +19,9 @@ class Trader_applyController extends Controller
         $data['state'] = state_model::get_data();
         $data['commodity'] = commodity_model::get_data();
         $data['quantity'] = quantity_model::get_data();
-        $data['mfee'] = DB::select('select * from mfee where from_date >= ? & to_date <= ?', [date('Y-m-d',time()),date('Y-m-d',time())]);
+        // DB::enableQueryLog();
+        $data['mfee'] = DB::select('select * from mfee where from_date <= ? AND to_date >= ?', [date('Y-m-d H:m:s',time()),date('Y-m-d H:m:s',time())]);
+        // dd(DB::getQueryLog());
         // var_dump($data['mfee']);
         return view('new-trader-creation', $data);
     }

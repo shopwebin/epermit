@@ -39,11 +39,11 @@ class tradelist_model extends Model
             'trader_id' => 4,
         ]);
         $a='';
-        for($i=0;$i<count($request->input('seller_name'));$i++){
+        for($i=0;$i<count($request->input('commodity'));$i++){
             $id = DB::table('trade_com')->insertGetId([
                 't_id' => $query['id'],
-                'commodity_id' => $request->input('commodity')[$i],
-                'quantity_id' => $request->input('quantity')[$i],
+                'com_id' => $request->input('commodity')[$i],
+                'q_id' => $request->input('quantity')[$i],
                 'weight' => $request->input('weight')[$i],
                 'a_weight' => $request->input('weight')[$i],
                 'trade_value' => $request->input('trade_value')[$i],
@@ -135,11 +135,12 @@ class tradelist_model extends Model
 
     public static function show(){
         // DB::enableQueryLog();
-        $dat = DB::select('SELECT `trade`.*,`quantity`.`qty_name` as `qty`,`commodity`.`com_name` as `cty` ,`amc`.`name` as `amc` FROM `trade` JOIN `amc` on `amc`.`id` = `trade`.`amc_id` JOIN `commodity` on `commodity`.`com_id` = `commodity_id` JOIN `quantity` on `quantity`.`id` = `quantity_id` Order By trade.id DESC');
-        $i=0;
+        $dat = DB::select('SELECT `trade`.*,`amc`.`name` as `amc` FROM `trade` JOIN `amc` on `amc`.`id` = `trade`.`amc_id` Order By trade.id DESC');
+        $i=0;        
         foreach($dat as $d){
-            $id = $d->id;            
+            $id = $d->id;
             $dat[$i]->sec = DB::table('spermit')->where('t_id',$id)->where('c_status',1)->get('id')->all();
+            $dat[$i]->trade_com = DB::select('select `trade_com`.*,`commodity`.`com_name` as `cty`,`quantity`.`qty_name` as `qty` from `trade_com` inner join `commodity` on `commodity`.`com_id` = `trade_com`.`com_id` inner join `quantity` on `quantity`.`id` = `trade_com`.`q_id` where `t_id` = ?',[$d->id]);
             $i++;
         }
         // dd(DB::getQueryLog());

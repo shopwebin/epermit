@@ -96,43 +96,29 @@
                                     $(".m_fee").val(($(".trade_value").val() * {{$mfee[0]->percent}})/100);
                                 });
                             });
-                            function com_val_1(){
-                                var c = $(".commodity").val();
-                                var q = $(".quantity").val();
-                                var w = $('.weight').val();
-                                console.log(c);
-                                console.log(q);
-                                console.log(w);
-                                if(!empty(c) && !empty(q) && !empty(w)){
+                            function com_val_1(a){
+                                // var a = $(this);
+                                a=a.parent().parent();
+                                // console.log(a);
+                                var c = a.find(".commodity").val();
+                                var q = a.find(".quantity").val();
+                                var w = a.find('.weight').val();
+                                // console.log(c);
+                                // console.log(q);
+                                // console.log(w);
+                                if((c != '') && (q != '') && (w != '')){
                                     $.ajax({
                                         type:'POST',
                                         url: "com_val",
                                         data: { com:c, qty:q },
                                         success:function(data){
-                                            console.log(data[0].amt);
-                                            $('.trade_value').val(w * data[0].amt);
-                                            $('.m_fee').val(w * data[0].amt* {{$mfee[0]->percent}}/100);
+                                            console.log(data);
+                                            a.find('.trade_value').val(w * data[0].amt);
+                                            a.find('.m_fee').val(w * data[0].amt* {{$mfee[0]->percent}}/100);
                                         }
                                     });
                                 }
                             }
-                            $(document).ready(function() {
-                                $(".weight").change(function() {
-                                    var c = $(".commodity").val();
-                                    var q = $(".quantity").val();
-                                    var w = $('.weight').val();
-                                    $.ajax({
-                                        type:'POST',
-                                        url: "com_val",
-                                        data: { com:c, qty:q },
-                                        success:function(data){
-                                            console.log(data[0].amt);
-                                            $('.trade_value').val(w * data[0].amt);
-                                            $('.m_fee').val(w * data[0].amt* {{$mfee[0]->percent}}/100);
-                                        }
-                                    });
-                                });
-                            });
                         </script>
                         <div class="col-md-4">
                             <div class="form-group">
@@ -152,18 +138,15 @@
                         </div>
                     </div>
                     <style>
-                        .com > div {
-                            padding: 5px;
-                        }
                     </style>
                     <h5 class="mt-3">Trade Details</h5>
                     <div class="repeat-div">
                         <div class="row">
                             <div class="com" style="display: flex;padding: 0;width: 100%;">
-                                <div class="col-md-4">
+                                <div class="col-md-4" style="padding: 5px;">
                                     <div class="form-group">
                                         <label> Commodity <span class="text-danger">*</span></label>
-                                        <select class="form-control pri-form commodity" name="commodity[]" onchange="com_val_1()">
+                                        <select class="form-control pri-form commodity" name="commodity[]" onchange="com_val_1($(this).parent())">
                                             <option>Select</option>
                                             @foreach($commodity as $cdy)
                                                 <option value="{{ $cdy->com_id }}">{{ $cdy->com_name }}</option>
@@ -171,10 +154,10 @@
                                         </select>
                                     </div>
                                 </div>
-                                <div class="col-md-2">
+                                <div class="col-md-2"  style="padding: 5px;">
                                     <div class="form-group">
                                         <label>Quantity Units <span class="text-danger">*</span></label>
-                                        <select class="form-control pri-form quantity" name="quantity[]" onchange="com_val_1()">
+                                        <select class="form-control pri-form quantity" name="quantity[]" onchange="com_val_1($(this).parent())">
                                             <option>Select</option>
                                             @foreach($quantity as $qty)
                                                 <option value="{{$qty->id}}">{{$qty->qty_name}}</option>
@@ -182,19 +165,19 @@
                                         </select>
                                     </div>
                                 </div>
-                                <div class="col-md-2">
+                                <div class="col-md-2" style="padding: 5px;">
                                     <div class="form-group">
                                         <label>Commodity Weight <span class="text-danger">*</span></label>
-                                        <input type="" class="form-control pri-form weight" name="weight[]">
+                                        <input type="" class="form-control pri-form weight" name="weight[]"  onchange="com_val_1($(this).parent())">
                                     </div>
                                 </div>
-                                <div class="col-md-2">
+                                <div class="col-md-2" style="padding: 5px;">
                                     <div class="form-group">
                                         <label>Trade Value (INR) <span class="text-danger">*</span></label>
                                         <input type="" class="form-control pri-form trade_value" name="trade_value[]">
                                     </div>
                                 </div>
-                                <div class="col-md-2">
+                                <div class="col-md-2" style="padding: 5px;">
                                     <div class="form-group">
                                         <label>Market Fees (INR) <span class="text-danger">*</span></label>
                                         <input type="" class="form-control pri-form m_fee" name="m_fee[]" readonly>
@@ -202,7 +185,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="add-new" onclick="addcom()"><i class="priya-plus"></i></div>
+                        <div class="add-new" onclick="addcom(1)"><i class="priya-plus"></i></div>
                     </div>
                     <div class="col-md-12">
                         <div class="form-check1">
@@ -223,8 +206,9 @@
     </div>
 </div>
 <script>
-    function addcom(){
-        $('.repeat-div').find('.row').append($('.repeat-div').find('.com').html());
+    function addcom(id){
+        $('.repeat-div').find('.row').append("<div class = 'com"+id+"' style='display: flex;padding: 0;width: 100%;'>"+$('.repeat-div').find('.com').html()+"</div>");
+        $('.add-new').attr('onclick','addcom('+(id+1)+')');
     };
 </script>
 @include("includes/footer");
