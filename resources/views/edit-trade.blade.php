@@ -170,9 +170,15 @@
                     <div class="ordered-list col-12">
                         <div class="list">
                             <div class="row">
-                                <div class="col-md-4 col-sm-6">
+                                <div class="col-md-3 col-sm-6">
                                     <div class="form-group">
-                                        <label>Commodity <span class="text-danger">*</span></label>
+                                        <label>Previous Commodity <span class="text-danger">*</span></label>
+                                        <input type="text" value="{{ $view[0]->com_name }}"  class="form-control pri-form" readonly>
+                                    </div>
+                                </div>
+                                <div class="col-md-3 col-sm-6">
+                                    <div class="form-group">
+                                        <label> Proccessed Commodity <span class="text-danger">*</span></label>
                                         <select name="com_id" class="com_id form-control pri-form">
                                                 <option value="">-- Select --</option>
                                             @foreach($commodity as $com)
@@ -229,7 +235,8 @@
                             <label>Market Fee (INR) <span class="text-danger">*</span></label>
                             <input type="" name="mfee" value="" class="mfee form-control pri-form" readonly required>
                         </div>
-                    </div><div class="col-md-4">
+                    </div>
+                    <!-- div class="col-md-4">
                             <div class="form-group">
                                 <label> Source Address <span class="text-danger">*</span></label>
                                 <input type="text" name="ad1" class="form-control pri-form" required>
@@ -280,7 +287,7 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </div -->
                     <div class="col-md-12 text-center">
                         <input type="button" name="" class="btn btn-cancel" value="Cancel">
                         <input type="submit" name="" class="btn" value="Submit">
@@ -323,7 +330,6 @@
                         <div class="col-md-3">
                             <div class="form-group">
                                 <label>Commodity <span class="text-danger">*</span></label>
-                                @php var_dump($commodity); @endphp
                                 @foreach($commodity as $com)@if($com->com_id == $view[0]->commodity_id)<input type="" name="c_id" value="{{ $view[0]->com_name }}" class="form-control pri-form" readonly>@endif @endforeach
                             </div>
                         </div>
@@ -571,7 +577,6 @@
                                         $('#license').html(k);
                                     });
                                 };
-
                                 function srch() {
                                     var id = $('.trader').val();
                                     $.get("{{url('trader')}}/" + id, function(result) {

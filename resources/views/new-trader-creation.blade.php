@@ -157,10 +157,10 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label> Commodity <span class="text-danger">*</span></label>
-                                    <select class="form-control pri-form commodity" name="commodity" onchange="com_val_1()">
+                                    <select class="form-control pri-form commodity" name="commodity[]" onchange="com_val_1()">
                                         <option>Select</option>
                                         @foreach($commodity as $cdy)
-                                        <option value="{{ $cdy->com_id }}">{{ $cdy->com_name }}</option>
+                                            <option value="{{ $cdy->com_id }}">{{ $cdy->com_name }}</option>
                                         @endforeach 
                                     </select>
                                 </div>
@@ -168,7 +168,7 @@
                             <div class="col-md-2">
                                 <div class="form-group">
                                     <label>Quantity Units <span class="text-danger">*</span></label>
-                                    <select class="form-control pri-form quantity" name="quantity" onchange="com_val_1()">
+                                    <select class="form-control pri-form quantity" name="quantity[]" onchange="com_val_1()">
                                         <option>Select</option>
                                         @foreach($quantity as $qty)
                                         <option value="{{$qty->id}}">{{$qty->qty_name}}</option>
@@ -179,19 +179,19 @@
                             <div class="col-md-2">
                                 <div class="form-group">
                                     <label>Commodity Weight <span class="text-danger">*</span></label>
-                                    <input type="" class="form-control pri-form weight" name="weight">
+                                    <input type="" class="form-control pri-form weight" name="weight[]">
                                 </div>
                             </div>
                             <div class="col-md-2">
                                 <div class="form-group">
                                     <label>Trade Value (INR) <span class="text-danger">*</span></label>
-                                    <input type="" class="form-control pri-form trade_value" name="trade_value">
+                                    <input type="" class="form-control pri-form trade_value" name="trade_value[]">
                                 </div>
                             </div>
                             <div class="col-md-2">
                                 <div class="form-group">
                                     <label>Market Fees (INR) <span class="text-danger">*</span></label>
-                                    <input type="" class="form-control pri-form m_fee" name="m_fee" readonly>
+                                    <input type="" class="form-control pri-form m_fee" name="m_fee[]" readonly>
                                 </div>
                             </div>
                         </div>
