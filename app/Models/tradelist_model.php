@@ -12,19 +12,19 @@ class tradelist_model extends Model
     use HasFactory;
     public static function add($request){
         $query['paid'] = $request->input('p_status');
-        $query['id'] = DB::table('trade')->insertGetId([            
-            'seller_name' => $request->input('seller_name') ,
-            'state_id' => $request->input('state') ,
-            'district_id' => $request->input('district') ,
-            'mandal_id' => $request->input('mandal') ,
-            'commodity_id' => $request->input('commodity') ,
-            'quantity_id' => $request->input('quantity') ,
-            'weight' => $request->input('weight') ,
-            'a_weight' => $request->input('a_weight') ,
-            'trade_value' => $request->input('trade_value') ,
-            'm_fee' => $request->input('m_fee') ,
-            'amc_id' => $request->input('amc') ,
-            'p_status' => $query['paid'] ,
+        $query['id'] = DB::table('trade')->insertGetId([
+            'seller_name' => $request->input('seller_name'),
+            'state_id' => $request->input('state'),
+            'district_id' => $request->input('district'),
+            'mandal_id' => $request->input('mandal'),
+            'commodity_id' => $request->input('commodity'),
+            'quantity_id' => $request->input('quantity'),
+            'weight' => $request->input('weight'),
+            'a_weight' => $request->input('a_weight'),
+            'trade_value' => $request->input('trade_value'),
+            'm_fee' => $request->input('m_fee'),
+            'amc_id' => $request->input('amc'),
+            'p_status' => $query['paid'],
             'trade_type' => $request->input('trade_type'),
             'trader_id' => 4,
         ]);

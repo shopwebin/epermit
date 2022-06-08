@@ -151,51 +151,58 @@
                             </div>
                         </div>
                     </div>
+                    <style>
+                        .com > div {
+                            padding: 5px;
+                        }
+                    </style>
                     <h5 class="mt-3">Trade Details</h5>
                     <div class="repeat-div">
                         <div class="row">
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label> Commodity <span class="text-danger">*</span></label>
-                                    <select class="form-control pri-form commodity" name="commodity[]" onchange="com_val_1()">
-                                        <option>Select</option>
-                                        @foreach($commodity as $cdy)
-                                            <option value="{{ $cdy->com_id }}">{{ $cdy->com_name }}</option>
-                                        @endforeach 
-                                    </select>
+                            <div class="com" style="display: flex;padding: 0;width: 100%;">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label> Commodity <span class="text-danger">*</span></label>
+                                        <select class="form-control pri-form commodity" name="commodity[]" onchange="com_val_1()">
+                                            <option>Select</option>
+                                            @foreach($commodity as $cdy)
+                                                <option value="{{ $cdy->com_id }}">{{ $cdy->com_name }}</option>
+                                            @endforeach 
+                                        </select>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="col-md-2">
-                                <div class="form-group">
-                                    <label>Quantity Units <span class="text-danger">*</span></label>
-                                    <select class="form-control pri-form quantity" name="quantity[]" onchange="com_val_1()">
-                                        <option>Select</option>
-                                        @foreach($quantity as $qty)
-                                        <option value="{{$qty->id}}">{{$qty->qty_name}}</option>
-                                        @endforeach
-                                    </select>
+                                <div class="col-md-2">
+                                    <div class="form-group">
+                                        <label>Quantity Units <span class="text-danger">*</span></label>
+                                        <select class="form-control pri-form quantity" name="quantity[]" onchange="com_val_1()">
+                                            <option>Select</option>
+                                            @foreach($quantity as $qty)
+                                                <option value="{{$qty->id}}">{{$qty->qty_name}}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="col-md-2">
-                                <div class="form-group">
-                                    <label>Commodity Weight <span class="text-danger">*</span></label>
-                                    <input type="" class="form-control pri-form weight" name="weight[]">
+                                <div class="col-md-2">
+                                    <div class="form-group">
+                                        <label>Commodity Weight <span class="text-danger">*</span></label>
+                                        <input type="" class="form-control pri-form weight" name="weight[]">
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="col-md-2">
-                                <div class="form-group">
-                                    <label>Trade Value (INR) <span class="text-danger">*</span></label>
-                                    <input type="" class="form-control pri-form trade_value" name="trade_value[]">
+                                <div class="col-md-2">
+                                    <div class="form-group">
+                                        <label>Trade Value (INR) <span class="text-danger">*</span></label>
+                                        <input type="" class="form-control pri-form trade_value" name="trade_value[]">
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="col-md-2">
-                                <div class="form-group">
-                                    <label>Market Fees (INR) <span class="text-danger">*</span></label>
-                                    <input type="" class="form-control pri-form m_fee" name="m_fee[]" readonly>
+                                <div class="col-md-2">
+                                    <div class="form-group">
+                                        <label>Market Fees (INR) <span class="text-danger">*</span></label>
+                                        <input type="" class="form-control pri-form m_fee" name="m_fee[]" readonly>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="add-new"><i class="priya-plus"></i></div>
+                        <div class="add-new" onclick="addcom()"><i class="priya-plus"></i></div>
                     </div>
                     <div class="col-md-12">
                         <div class="form-check1">
@@ -215,6 +222,11 @@
         </div>
     </div>
 </div>
+<script>
+    function addcom(){
+        $('.repeat-div').find('.row').append($('.repeat-div').find('.com').html());
+    };
+</script>
 @include("includes/footer");
 <div id="pay-mode-modal" class="help-modal" style="display: none;">
     <div class="help-modal-content pop-md">
