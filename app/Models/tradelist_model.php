@@ -12,7 +12,7 @@ class tradelist_model extends Model
     use HasFactory;
     public static function add($request){
         $query['paid'] = $request->input('p_status');
-        $query['id'] = DB::table('trade')->insertGetId([
+        /* = DB::table('trade')->insertGetId([
             'seller_name' => $request->input('seller_name'),
             'state_id' => $request->input('state'),
             'district_id' => $request->input('district'),
@@ -27,7 +27,31 @@ class tradelist_model extends Model
             'p_status' => $query['paid'],
             'trade_type' => $request->input('trade_type'),
             'trader_id' => 4,
+        ]);*/
+        $query['id'] = DB::table('trade')->insertGetId([
+            'seller_name' => $request->input('seller_name'),
+            'state_id' => $request->input('state'),
+            'district_id' => $request->input('district'),
+            'mandal_id' => $request->input('mandal'),
+            'amc_id' => $request->input('amc'),
+            'p_status' => $query['paid'],
+            'trade_type' => $request->input('trade_type'),
+            'trader_id' => 4,
         ]);
+        $a='';
+        for($i=0;$i<count($request->input('seller_name'));$i++){
+            $id = DB::table('trade_com')->insertGetId([
+                't_id' => $query['id'],
+                'commodity_id' => $request->input('commodity')[$i],
+                'quantity_id' => $request->input('quantity')[$i],
+                'weight' => $request->input('weight')[$i],
+                'a_weight' => $request->input('weight')[$i],
+                'trade_value' => $request->input('trade_value')[$i],
+                'm_fee' => $request->input('m_fee')[$i],
+            ]);
+            $a.=",".$id;
+        }
+        DB::update('update trade set tc_id =? where id=?',[substr($a,1),$query['id']]);
         return $query;
     }
 

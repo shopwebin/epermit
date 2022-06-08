@@ -321,7 +321,7 @@ class Trader_applyController extends Controller
             // var_dump($request->all());
             // return $this->show();
         ]);*/
-        $request->request->add(['a_weight' => $request->all()['weight']]);
+        // $request->request->add(['a_weight' => $request->all()['weight']]);
         $trade = new tradelist_model();
         $query = $trade->add($request);
         if($query['paid']){
