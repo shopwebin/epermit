@@ -35,17 +35,37 @@
                     <tbody>
                         @foreach($dat as $td)
                         @php
-                        $td->cty = '';
-                        $td->weight = 0;
-                        $td->a_weight = 0;
-                        $td->trade_value = 0;
+                            $td->cty = '';
+                            $td->weight = 0;
+                            $td->a_weight = 0;
+                            $td->trade_value = 0;
+                            $cq=[];
+                            $acq=[];
+                            $q=[];
+                            $cty = [''];
                             foreach($td->trade_com as $tc){
-                                $td->cty .= ','.$tc->cty;
-                                $td->weight+=$tc->weight;
-                                $td->a_weight+=$tc->a_weight;
+                                if(!in_array($tc->cty,$cty)){
+                                    $cty[] = $tc->cty;
+                                }
+                                // $td->cty .= ','.$tc->cty;
                                 $td->trade_value+=$tc->trade_value;
+                                if(!isset($q[$tc->q_id])){
+                                    $q[$tc->q_id]=$cq[$tc->q_id]=$acq[$tc->q_id] = 0;
+                                }
+                                $acq[$tc->q_id]+=$tc->a_weight;
+                                $cq[$tc->q_id]+=$tc->weight;
+                                $q[$tc->q_id]=$tc->qty;
                             }
+                            $td->weight='';
+                            $td->a_weight='';
+                            foreach($q as $key=>$q1){
+                                $td->weight .= ",".$cq[$key].$q1;
+                                $td->a_weight .= ",".$acq[$key].$q1;
+                            }                            
+                            $td->cty = join(",",$cty);
                             $td->cty = substr($td->cty,1);
+                            $td->weight = substr($td->weight,1);
+                            $td->a_weight = substr($td->a_weight,1);
                         @endphp
                         <tr>
                             <td data-id="{{ $td->id }}" data-p_status="{{ $td->id }}">T{{ $td->id }}</td>
@@ -76,12 +96,11 @@
                                 @endif
                                     @if($td->p_status > 2) 
                                         @foreach($td->sec as $sec)                                      
-                                           
-                                                <a href="secondary-permit-creation/S{{$sec->id}}" class="btn btn-info">Edit Permit-S{{$sec->id}}</a>
+                                            <a href="secondary-permit-creation/S{{$sec->id}}" class="btn btn-info">Edit Permit-S{{$sec->id}}</a>
                                         @endforeach
                                     @endif
                                     @if(isset($td->permit_id))
-                                            <a href="permit-creation/P{{ $td->permit_id }}" class="btn btn-info">Edit Permit-P{{ $td->permit_id }}</a>
+                                        <a href="permit-creation/P{{ $td->permit_id }}" class="btn btn-info">Edit Permit-P{{ $td->permit_id }}</a>
                                     @endif
                                 @endif
                                 @if($td->p_status % 2 != 0)

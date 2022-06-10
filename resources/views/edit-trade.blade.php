@@ -1,4 +1,5 @@
 @include("includes/header");
+                            {{--@dd($view[0]->tc[0]->amt);--}}
 <div class="container-fluid bdy dashboard">
     <div class="py-5 section">
         <div class="card">
@@ -34,7 +35,7 @@
                         Retail sale
                     </label>
                 </div>
-
+                
                 @if(session()->has('dat'))
                 @php    $dat = session()->get('dat');
                     session()->forget('dat');
@@ -120,14 +121,14 @@
                                     alert("Kindly check the quantity");
                                 }
                             });
-                        });                        
+                        });        
                         $(document).ready(function() {
                             $(".com_id").change(function() {
                                 var w = $('.a_weight').val();
                                 $.get("{{url('com_value')}}/"+w,function(result){
                                     // console.log(result);
                                     $('.trade_value').val(w * result.amt);
-                                    $('.mfee').val((w*result.amt*{{$mfee[0]->percent}})/100);
+                                    $('.mfee').val((w * result.amt*{{$mfee[0]->percent}})/100);
                                 });
                             });
                         });
@@ -173,7 +174,7 @@
                                 <div class="col-md-3 col-sm-6">
                                     <div class="form-group">
                                         <label>Previous Commodity <span class="text-danger">*</span></label>
-                                        <input type="text" value="{{ $view[0]->com_name }}"  class="form-control pri-form" readonly>
+                                        <input type="text" value="{{ $view[0]->tc[0]->com_name }}"  class="form-control pri-form" readonly>
                                     </div>
                                 </div>
                                 <div class="col-md-3 col-sm-6">
@@ -190,9 +191,9 @@
                                 <div class="col-md-2 col-sm-6">
                                     <div class="form-group">
                                         <label>Quantity Type <span class="text-danger">*</span></label>
-                                        {{--<input type="" value="{{ $view[0]->qty_name }}" name="q_id" class="form-control pri-form" readonly>--}}
+                                        {{--<input type="" value="{{ $view[0]->tc[0]->qty_name }}" name="q_id" class="form-control pri-form" readonly>--}}
                                         <select name="q_id" class="q_id form-control pri-form">
-                                            <option value="{{ $view[0]->q_id }}">{{ $view[0]->qty_name }}</option>
+                                            <option value="{{ $view[0]->tc[0]->q_id }}">{{ $view[0]->tc[0]->qty_name }}</option>
                                         </select>
                                     </div>
                                 </div>
@@ -330,7 +331,9 @@
                         <div class="col-md-3">
                             <div class="form-group">
                                 <label>Commodity <span class="text-danger">*</span></label>
-                                @foreach($commodity as $com)@if($com->com_id == $view[0]->commodity_id)<input type="" name="c_id" value="{{ $view[0]->com_name }}" class="form-control pri-form" readonly>@endif @endforeach
+                                @foreach($commodity as $com) @if($com->com_id == $view[0]->commodity_id)
+                                    <input type="" name="c_id" value="{{ $view[0]->tc[0]->com_name }}" class="form-control pri-form" readonly>
+                                @endif @endforeach
                             </div>
                         </div>
                         <div class="col-md-3">
@@ -538,7 +541,7 @@
                     <div class="col-md-4">
                         <div class="form-group">
                             <label>Commodity <span class="text-danger">*</span></label>
-                            @foreach($commodity as $com)@if($com->com_id == $view[0]->commodity_id)<input type="" name="c_id" value="{{ $view[0]->com_name }}" class="form-control pri-form" readonly>@endif @endforeach
+                            @foreach($commodity as $com)@if($com->com_id == $view[0]->commodity_id)<input type="" name="c_id" value="{{ $view[0]->tc[0]->com_name }}" class="form-control pri-form" readonly>@endif @endforeach
                         </div>
                     </div>
                     <div class="col-md-4">
@@ -591,11 +594,11 @@
                                     $(".qtt").change(function() {
                                         var w = $('.qtt').val();
                                         if(w > {{ $view[0]->a_weight }}){
-                                                    alert("Kindly enter value below or equal Balance quantity");
-                                                    $('.qtt').val("{{ $view[0]->a_weight }}");
-                                                    $('.trade_value').val({{ $view[0]->a_weight }} * {{ $view[0]->amt}});
+                                            alert("Kindly enter value below or equal Balance quantity");
+                                            $('.qtt').val("{{ $view[0]->a_weight }}");
+                                            $('.trade_value').val({{ $view[0]->a_weight }} * {{ $view[0]->tc[0]->amt}});
                                         } else {
-                                            $('.trade_value').val(w * {{ $view[0]->amt}});
+                                            $('.trade_value').val(w * {{ $view[0]->tc[0]->amt}});
                                         }
                                     });
                                 });
@@ -784,9 +787,9 @@
                             if($q > {{$view[0]->a_weight}}){
                                 alert("Kindly enter value below or equal current Balance quantity");
                                 $('#a_weight').val({{$view[0]->a_weight}});
-                                $('.trade_value').val({{$view[0]->a_weight}} * {{$view[0]->amt}});
+                                $('.trade_value').val({{$view[0]->a_weight}} * {{$view[0]->tc[0]->amt}});
                             }else {
-                                $('.trade_value').val($q * {{$view[0]->amt}});}
+                                $('.trade_value').val($q * {{$view[0]->tc[0]->amt}});}
                         });
                     });
                 </script>
@@ -825,14 +828,14 @@
                             <div class="col-md-4">
                                 <dl>
                                     <dt>Commodity</dt>
-                                    <input type="hidden" name="com_name" value="{{$view[0]->com_name}}">
-                                    <dd>{{$view[0]->com_name}}</dd>
+                                    <input type="hidden" name="com_name" value="{{$view[0]->tc[0]->com_name}}">
+                                    <dd>{{$view[0]->tc[0]->com_name}}</dd>
                                 </dl>
                             </div>
                             <div class="col-md-4">
                                 <dl>
                                     <dt>Balance Quantity</dt>
-                                    <dd><input type="number"  name="a_weight" id="a_weight" placeholder="Enter quantity" value=""> {{$view[0]->qty_name}}</dd>
+                                    <dd><input type="number"  name="a_weight" id="a_weight" placeholder="Enter quantity" value=""> {{$view[0]->tc[0]->qty_name}}</dd>
                                 </dl>
                             </div>
                         </div>

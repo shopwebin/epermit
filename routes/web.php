@@ -14,14 +14,14 @@ use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
 
 /*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
+    |--------------------------------------------------------------------------
+    | Web Routes
+    |--------------------------------------------------------------------------
+    |
+    | Here is where you can register web routes for your application. These
+    | routes are loaded by the RouteServiceProvider within a group which
+    | contains the "web" middleware group. Now create something great!
+    |
 */
 
 Route::get('/', function () {
@@ -38,7 +38,6 @@ Route::get('/registration', function () {
 
 Route::get('/permit-creation',  [Trader_applyController::class,'permitCreating']);
 
-
 Route::get('/historical-trade', function () {
     return view('historical-trade');
 });
@@ -47,7 +46,6 @@ Route::get('/primary-permit-creation', function () {
     return view('primary-permit-creation');
 });
 
-
 Route::get('/secondary-permit-creation', function () {
     return view('secondary-permit-creation');
 });
@@ -55,10 +53,6 @@ Route::get('/secondary-permit-creation', function () {
 Route::get('/edit-trade-for-multicommodities', function () {
     return view('edit-trade-for-multicommodities');
 });
-
-/*Route::get('/printavle-permit', function () {
-    return view('printavle-permit');
-});*/
 
 Route::get('/market_fee',[AdminController::class,'mfee']);
 
@@ -96,8 +90,6 @@ Route::get('/trader/{id}',[Trader_applyController::class,'find_trader']);
 
 Route::get('/print-permit/{id}',[Trader_applyController::class,'print_permit']);
 
-// Route::get('/cancel-permit/{id}',[Trader_applyController::class,'cancel_permit']);
-
 Route::get('/com_value/{id}',[Trader_applyController::class,'com_value']);
 
 Route::get('/quantity/edit/{id}', [AdminController::class,'qty_edit']);
@@ -108,30 +100,7 @@ Route::get('/market_fee/edit/{id}', [AdminController::class,'mfee_edit']);
 
 Route::get('/market_fee/delete/{id}', [AdminController::class,'mfee_delete']);
 
-/*Route::get('send-mail', function () {
-   
-    $details = [
-        'title' => 'Mail from ItSolutionStuff.com',
-        'body' => 'This is for testing email using smtp'
-    ];
-    $user['to']='97zg42wqil@popcornfly.com';
-    Mail::to('97zg42wqil@popcornfly.com')->send(new \App\Mail\MyTestMail($details));
-   /*Mail::send('mail',$details,function($message) use ($user){
-       $message->to($user['to']);
-       $message->subject('hello Details');
-   });
-    dd("Email is Sent.");
-});*/
-// Route::post('/send-mail',[AdminController::class,'send_mail']);
-
 Route::get('/send-mail',[AdminController::class,'send_mail']);
-
-/*Route::get('/send-mail',function(){
-    // Mail::to('97zg42wqil@popcornfly.com')->send(new MyTestMail());
-    // return new MyTestMail();
-    Mail::to('97zg42wqil@popcornfly.com')->send(new WelcomeMail());
-    return new WelcomeMail();
-});*/
 
 Route::post('/pay',[Trader_applyController::class,'payment']);
 
@@ -175,4 +144,31 @@ Route::post('/market_fee/add', [AdminController::class,'mfee_add']);
 
 Route::post('/market_fee/update', [AdminController::class,'mfee_update']);
 
-// Route::get('/trade', [Trader_applyController::class,'show']);
+/*
+    Route::get('/trade', [Trader_applyController::class,'show']);
+    Route::get('/printavle-permit', function () {
+    return view('printavle-permit');
+    });
+    Route::get('send-mail', function () {
+   
+    $details = [
+        'title' => 'Mail from ItSolutionStuff.com',
+        'body' => 'This is for testing email using smtp'
+    ];
+    $user['to']='97zg42wqil@popcornfly.com';
+    Mail::to('97zg42wqil@popcornfly.com')->send(new \App\Mail\MyTestMail($details));
+   Mail::send('mail',$details,function($message) use ($user){
+       $message->to($user['to']);
+       $message->subject('hello Details');
+   });
+    dd("Email is Sent.");
+    });
+     Route::post('/send-mail',[AdminController::class,'send_mail']);
+    Route::get('/send-mail',function(){
+        // Mail::to('97zg42wqil@popcornfly.com')->send(new MyTestMail());
+        // return new MyTestMail();
+        Mail::to('97zg42wqil@popcornfly.com')->send(new WelcomeMail());
+        return new WelcomeMail();
+    });
+    Route::get('/cancel-permit/{id}',[Trader_applyController::class,'cancel_permit']);
+*/

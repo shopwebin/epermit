@@ -284,9 +284,13 @@ class Trader_applyController extends Controller
         $data['commodity'] = commodity_model::get_data();
         $data['districts'] = districts_model::get_data();
         $data['mandals'] = mandals_model::get_data();
-        $data['view'] = DB::select('select trade.*,commodity.*,quantity.qty_name,trader_apply.id as trader_id from trade JOIN commodity on commodity.com_id = commodity_id join quantity on quantity.id = commodity.q_id Join trader_apply on trader_apply.id = trade.trader_id  where '.$i);
-        $data['qty_amt'] = DB::select('select sum(`a_weight`) as a_qty from trade where commodity_id = '.$data['view'][0]->commodity_id." group by commodity_id ");
-        $data['mfee'] = DB::select('select * from mfee where from_date >= ? & to_date <= ?', [date('Y-m-d',time()),date('Y-m-d',time())]);
+        // $data['view'] = DB::select('select trade.*,commodity.*,quantity.qty_name,trader_apply.id as trader_id,trade_com.* from trade JOIN trade_com on trade_com.t_id = trade.id JOIN commodity on commodity.com_id = trade_com.com_id join quantity on quantity.id = trade_com.q_id Join trader_apply on trader_apply.id = trade.trader_id  where '.$i);
+        $data['view'] = DB::select('select trade.*,trader_apply.id as trader_id from trade Join trader_apply on trader_apply.id = trade.trader_id  where '.$i);
+        foreach($data['view'] as $i=>$d){
+            $data['view'][$i]->tc = DB::select('select trade_com.*,commodity.*,quantity.qty_name from trade_com join quantity on quantity.id = trade_com.q_id join commodity on commodity.com_id = trade_com.com_id where trade_com.t_id = '.$d->id);
+        }
+        // $data['qty_amt'] = DB::select('select sum(`a_weight`) as a_qty from trade where commodity_id = '.$data['view'][0]->com_id." group by commodity_id ");
+        $data['mfee'] = DB::select('select * from mfee where from_date <= ? && to_date >= ?', [date('Y-m-d H:m:s',time()),date('Y-m-d H:m:s',time())]);
         return view('edit-trade',$data);
     }
 
