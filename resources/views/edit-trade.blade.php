@@ -47,6 +47,7 @@
                         <div class="col-md-12">
                             <!-- <h6>Convert Trade</h6> -->
                         </div>
+                        {{--@foreach($view[0]->tc as $tc)--}}
                         <div class="col-md-3">
                             <div class="form-group">
                                 <label>Trade ID <span class="text-danger">*</span></label>
@@ -60,16 +61,22 @@
                                 </select>
                             </div>
                         </div>
+                        <!--div class="col-md-3">
+                            <div class="form-group">
+                                <label for="">Commodity <span class="text-danger">*</span></label>
+                                <input type="text" class="form-control pri-form" value="{ tc->com_name }}" readonly>
+                            </div>
+                        </div-->
                         <div class="col-md-3">
                             <div class="form-group">
                                 <label>Purchase Quantity <span class="text-danger">*</span></label>
-                                <input type="" name="" class="form-control pri-form" value="{{ $view[0]->weight }}" readonly>
+                                <input type="" name="" class="form-control pri-form" value="{{ $view[0]->tc[0]->weight }}" readonly>
                             </div>
                         </div>
                         <div class="col-md-3">
                             <div class="form-group">
                                 <label>Balance Quantity <span class="text-danger">*</span></label>
-                                <input type="" name="a_weight" class="form-control pri-form" value="{{ $view[0]->a_weight }}">
+                                <input type="" name="a_weight" class="form-control pri-form" value="{{ $view[0]->tc[0]->a_weight }}">
                             </div>
                         </div>
                         <div class="col-md-3">
@@ -81,6 +88,7 @@
                                 </div>
                             </div>
                         </div>
+                        {{--@endforeach--}}
                         <div class="col-md-12 text-center">
                             <input type="button" name="" class="btn btn-cancel" value="Cancel">
                             <input type="submit" name="" class="btn" value="Submit">
@@ -94,19 +102,15 @@
                         <div class="row bordered bg-color1-1">
                             <div class="col-md-8">
                                 <dl>
-                                    <dt>Address</dt><input type="hidden" name="id" value="@if(isset($dat->id)){{ $dat->id }}@endif">
-                                    <dd>@if(isset($view[0]->ad1)){{$view[0]->ad1}}
-                                    <input type="hidden" name="ad1" placeholder="Enter Address" value="{{$view[0]->ad1}}">    
-                                    @else<input type="text" name="ad1" placeholder="Enter Address" value="{{$view[0]->ad1}}">@endif
-                                        ,@if(isset($view[0]->ad2)){{$view[0]->ad2}}
-                                        <input type="text" name="ad2" placeholder="Enter Address" value="{{$view[0]->ad2}}">
-                                        @else<input type="text" name="ad2" placeholder="Enter Address" value="{{$view[0]->ad2}}">@endif</dd>
+                                    <dt>Address</dt>
+                                    <input type="hidden" name="id" value="@if(isset($dat->id)){{ $dat->id }}@endif">
+                                    <dd>147,m.g.road</dd>
                                 </dl>
                             </div>
                             <div class="col-md-4">
                                 <dl>
-                                    <dt>Total Quantity</dt>
-                                    <dd>{{ $view[0]->a_weight }}</dd>
+                                    <dt>Total Purchased Quantity</dt>
+                                    <dd>{{ $view[0]->tc[0]->weight }}</dd>
                                     <!-- <dd>@if(isset($qty_amt[0]->a_qty)){{$qty_amt[0]->a_qty}}@endif</dd> -->
                                 </dl>
                             </div>
@@ -121,7 +125,7 @@
                                     alert("Kindly check the quantity");
                                 }
                             });
-                        });        
+                        });
                         $(document).ready(function() {
                             $(".com_id").change(function() {
                                 var w = $('.a_weight').val();
@@ -138,34 +142,34 @@
                                 $('.mfee').val(w*{{$mfee[0]->percent}}/50);
                             });
                         });         
-                            $(document).ready(function() {      
-                        $(".fd").change(function() {
-                            var w = $(".fd").val();
-                            var h = $(".td").val();
-                            // alert(w);
-                            var strDate = (new Date()).toISOString().split('T')[0];
-                            // alert(strDate);
-                            if(w < strDate){
-                                alert("old date permit can't be Created");
-                                $(".fd").val('');
-                            }
-                            if((!empty(h))&&(w>=h)){
-                                alert("Atleast 1 day  permit can be Created");
-                            }
-                        });
+                        $(document).ready(function() {      
+                            $(".fd").change(function() {
+                                var w = $(".fd").val();
+                                var h = $(".td").val();
+                                // alert(w);
+                                var strDate = (new Date()).toISOString().split('T')[0];
+                                // alert(strDate);
+                                if(w < strDate){
+                                    alert("old date permit can't be Created");
+                                    $(".fd").val('');
+                                }
+                                if((!empty(h))&&(w>=h)){
+                                    alert("Atleast 1 day  permit can be Created");
+                                }
+                            });
                         });
                         $(document).ready(function() {      
-                        $(".td").change(function() {
-                            var w = $(".fd").val();
-                            var h = $(".td").val();
-                            // alert(w);
-                            var strDate = (new Date()).toISOString().split('T')[0];
-                            // alert(strDate);
-                            if((w < strDate)||(w>=h)){
-                                alert("Atleast 1 day  permit can be Created");
-                                $(".td").val('');
-                            }
-                        });
+                            $(".td").change(function() {
+                                var w = $(".fd").val();
+                                var h = $(".td").val();
+                                // alert(w);
+                                var strDate = (new Date()).toISOString().split('T')[0];
+                                // alert(strDate);
+                                if((w < strDate)||(w>=h)){
+                                    alert("Atleast 1 day  permit can be Created");
+                                    $(".td").val('');
+                                }
+                            });
                         });
                     </script>
                     <div class="ordered-list col-12">
@@ -173,8 +177,14 @@
                             <div class="row">
                                 <div class="col-md-3 col-sm-6">
                                     <div class="form-group">
-                                        <label>Previous Commodity <span class="text-danger">*</span></label>
-                                        <input type="text" value="{{ $view[0]->tc[0]->com_name }}"  class="form-control pri-form" readonly>
+                                        <label>Commodity <span class="text-danger">*</span></label>
+                                        <select name="p_com_id" id="p_com_id" class="form-control">
+                                        <option value="">Select</option>
+                                            @foreach( $view[0]->tc as $tc )
+                                                <option value="{{ $tc->com_id }}">{{ $tc->com_name }}</option>
+                                            @endforeach
+                                        </select>
+                                        <!--input type="text" value="{{ $view[0]->tc[0]->com_name }}"  class="form-control pri-form" readonly -->
                                     </div>
                                 </div>
                                 <div class="col-md-3 col-sm-6">
@@ -415,6 +425,15 @@
                                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                                 }
                             });
+
+                        $(document).ready(function() {
+                            $("#p_com_id").change(function(){
+                                console.log("kkk");
+                                $.get("{{url('com_tc')}}/{{$view[0]->id}}/" + $(this).val(), function(result){
+                                    console.log(result);
+                                });
+                            });
+                        });
                             $(document).ready(function() {
                                 $(".state").change(function() {
                                     $.get("{{url('district')}}/" + $(this).val(), function(result) {
@@ -593,10 +612,10 @@
                                 $(document).ready(function() {
                                     $(".qtt").change(function() {
                                         var w = $('.qtt').val();
-                                        if(w > {{ $view[0]->a_weight }}){
+                                        if(w > {{ $view[0]->tc[0]->a_weight }}){
                                             alert("Kindly enter value below or equal Balance quantity");
-                                            $('.qtt').val("{{ $view[0]->a_weight }}");
-                                            $('.trade_value').val({{ $view[0]->a_weight }} * {{ $view[0]->tc[0]->amt}});
+                                            $('.qtt').val("{{ $view[0]->tc[0]->a_weight }}");
+                                            $('.trade_value').val({{ $view[0]->tc[0]->a_weight }} * {{ $view[0]->tc[0]->amt}});
                                         } else {
                                             $('.trade_value').val(w * {{ $view[0]->tc[0]->amt}});
                                         }
@@ -784,10 +803,10 @@
                     $(document).ready(function() {
                         $('#a_weight').change(function(){
                             $q = $('#a_weight').val();
-                            if($q > {{$view[0]->a_weight}}){
+                            if($q > {{$view[0]->tc[0]->a_weight}}){
                                 alert("Kindly enter value below or equal current Balance quantity");
-                                $('#a_weight').val({{$view[0]->a_weight}});
-                                $('.trade_value').val({{$view[0]->a_weight}} * {{$view[0]->tc[0]->amt}});
+                                $('#a_weight').val({{$view[0]->tc[0]->a_weight}});
+                                $('.trade_value').val({{$view[0]->tc[0]->a_weight}} * {{$view[0]->tc[0]->amt}});
                             }else {
                                 $('.trade_value').val($q * {{$view[0]->tc[0]->amt}});}
                         });

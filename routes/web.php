@@ -92,6 +92,10 @@ Route::get('/print-permit/{id}',[Trader_applyController::class,'print_permit']);
 
 Route::get('/com_value/{id}',[Trader_applyController::class,'com_value']);
 
+Route::get('/com_tc/{id}',[Trader_applyController::class,'com_tc']);
+
+// Route::get('/com_tc/{tc}/{id}',[Trader_applyController::class,'com_tc']);
+
 Route::get('/quantity/edit/{id}', [AdminController::class,'qty_edit']);
 
 Route::get('/quantity/delete/{id}', [AdminController::class,'qty_delete']);

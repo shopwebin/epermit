@@ -83,8 +83,15 @@ class Trader_applyController extends Controller
     }
 
     public function com_value($id){
-        $a = DB::select('select amt from commodity where com_id = ?', [$id])[0];
+        $a = DB::select('select * from commodity where com_id = ?', [$id])[0];
+        // var_dump('kkk');
         return $a;
+    }
+
+    public function com_tc($id){
+        var_dump("kkk");
+        // $a = DB::select('SELECT * FROM `trade_com` WHERE `tc_id` = ? AND `com_id` = ?',[$tc,$id])[0];
+        // return $a;
     }
 
     public function update_trade(Request $request)
@@ -168,7 +175,7 @@ class Trader_applyController extends Controller
     public function cancel_permit(Request $request){
         // echo 'kk';
         $trade = new premit_model();
-        $data = []; 
+        $data = [];
         $id = $request->all();
         if ($id['id'][0] == 'P'){
             $data['dat'] = $trade->primary1(substr($id['id'],1))[0];
@@ -215,8 +222,7 @@ class Trader_applyController extends Controller
         return redirect()->back()->with('alert','Permit updated Successfully');
     }
 
-    public function secondaryCreating1($td)
-    {
+    public function secondaryCreating1($td){
         $trade = new premit_model();
         $data['state'] = state_model::get_data();
         $data['commodity'] = commodity_model::get_data();
@@ -236,8 +242,7 @@ class Trader_applyController extends Controller
         return view('secondary-permit-creation', $data);
     }
 
-    public function edit_pre_permit($id, Request $request)
-    {
+    public function edit_pre_permit($id, Request $request){
         $input = $request->all();
         $data = [];
         if(isset($input['submit'])){

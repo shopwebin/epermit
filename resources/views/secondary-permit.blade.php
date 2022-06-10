@@ -129,20 +129,16 @@
                 @endif
             </tr>
             <tr><td colspan="4"><hr /></td></tr>
-            <tr>
-                <td colspan="4">Duration of the permit in force from {{$dat->valid_from}} PM @if(isset($dat->valid_to)) to {{$dat->valid_to}}. @endif {{--@if(isset($dat->c_reason)) Due to {{$dat->c_reason}} @endif --}}</td>
+            <tr><td colspan="4">Duration of the permit in force from {{$dat->valid_from}} PM @if(isset($dat->valid_to)) to {{$dat->valid_to}}. @endif {{--@if(isset($dat->c_reason)) Due to {{$dat->c_reason}} @endif --}}</td>
             </tr>
             {{-- @if(isset($dat->c_reason)) <tr><td colspan="4"> Cancellation reason: {{$dat->c_reason}} </td></tr> @endif --}}
             <tr><td colspan="4"><hr /></td></tr>
-            <tr>
-                <td colspan="4">I declare that the information furnished above is true to the best of my knowledge & belief.</td>
+            <tr><td colspan="4">I declare that the information furnished above is true to the best of my knowledge & belief.</td>
             </tr>
             <tr><td colspan="4"><hr /></td></tr>
-            <tr>
-                <td colspan="4" style="text-align: right; padding-top: 50px;">Signature of Trader/Exporter</td>
+            <tr><td colspan="4" style="text-align: right; padding-top: 50px;">Signature of Trader/Exporter</td>
             </tr>
-            <tr>
-                <!-- <td colspan="4" style="font-size: 12px; padding-top: 50px;">https://myap.e-pragati.in/prweb/sso1/uaWvF7nvxy_mi7mEeoM6lA%5B%5B*/!STANDARD?pyActivity=%40baseclass.pzTransformAndRun&pzTra</td> -->
+            <tr><!-- <td colspan="4" style="font-size: 12px; padding-top: 50px;">https://myap.e-pragati.in/prweb/sso1/uaWvF7nvxy_mi7mEeoM6lA%5B%5B*/!STANDARD?pyActivity=%40baseclass.pzTransformAndRun&pzTra</td> -->
             </tr>
         </table>
     </div>
